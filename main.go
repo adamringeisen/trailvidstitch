@@ -23,7 +23,7 @@ func main() {
 	}
 
 	for _, file := range files {
-		if !file.IsDir() && filepath.Ext(file.Name()) == ".MP4" {
+		if !file.IsDir() && filepath.Ext(file.Name()) == ".MP4" || filepath.Ext(file.Name()) == ".mp4"  {
 			currentBatch = append(currentBatch, file.Name())
 			fileCount++
 
