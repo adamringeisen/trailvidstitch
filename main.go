@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"strings"
 	"path/filepath"
+	"strings"
 )
 var batchFiles []string
 var lastBatchFileName string
@@ -93,10 +93,10 @@ func writeBatchToFile(batch []string) {
 }
 
 func createVids() {
-	for _, batchfile := range batchFiles {
+	for i, batchfile := range batchFiles {
 		cmd := exec.Command("ffmpeg", "-f", "concat", "-safe", "0", "-i", batchfile, "-c", "copy", strings.TrimSuffix(batchfile, "txt") + "mp4")
 
-		fmt.Println("Executing Command:", cmd.String())
+		fmt.Printf("Creating Video %d of %d...\n", i+1, len(batchFiles))
 
 		out, err := cmd.CombinedOutput()
 		if err != nil {
@@ -105,7 +105,7 @@ func createVids() {
 		return
 		}
 
-	fmt.Println("ffmpeg output:", string(out))
+	// fmt.Println("ffmpeg output:", string(out))
 	fmt.Println("Successfully concatenated videos!")
 	}
 }
